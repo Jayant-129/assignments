@@ -5,3 +5,6 @@ fs.writeFile("output.txt",data,"utf-8" ,(err) => {
         console.log(err);
     }
 });
+for(let i = 1; i <= 500; i++){
+    console.log(i);
+}
