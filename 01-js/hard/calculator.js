@@ -16,6 +16,72 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor(){
+    this.result = 0;
+  }
+  add(a){
+    this.result += a;
+    return this.result;
+  }
+  subtract(b){
+    this.result -= b;
+    return this.result;
+  }
+  multiply(c){
+    this.result *= c;
+    return this.result;
+  }
+  divide(d){
+    if (d === 0) {
+      throw new Error("Cannot divide by zero");
+    }
+    try{
+      this.result /= d;
+      return this.result;
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  clear(){
+    this.result = 0;
+    return this.result;
+  }
+  getResult(){
+    return this.result;
+  }
+  calculate(a){
+    const re = /[a-z]/i;
+    if(re.test(a)){
+      throw new Error("Input has alphabets");
+    }
+      if (a.includes(' / 0')) {
+        throw new Error("Cannot divide by zero");
+      }
+      if (!this.isValid(a)) {
+        throw new Error("Invalid parentheses");
+      }
+      this.result = eval(a);
+      return this.getResult();
+
+  }
+
+  isValid(s){
+    let stack = [];
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] === '(') {
+        stack.push(s[i]);
+      } else if (s[i] === ')') {
+        if (stack.length === 0) {
+          return false;
+        }
+        stack.pop();
+      }
+    }
+    return stack.length === 0;
+  }
+}
 
 module.exports = Calculator;
+
